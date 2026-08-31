@@ -1,0 +1,37 @@
+name: Build RootHide arm64e deb
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Theos
+        uses: theos/theos-action@main
+        with:
+          theos-src: ${{ github.workspace }}/theos
+          sdks: iPhoneOS16.5
+
+      - name: Build RootHide arm64e package
+        run: make package FINALPACKAGE=1
+
+      - name: Verify package architecture
+        run: |
+          set -eu
+          deb=$(find packages -maxdepth 1 -name '*.deb' -print -quit)
+          test -n "$deb"
+          dpkg-deb -f "$deb" Architecture
+          dpkg-deb -f "$deb" Name Version
+
+      - name: Upload deb artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ActionGesture2215-arm64e
+          path: packages/*arm64e.deb
+          if-no-files-found: error
