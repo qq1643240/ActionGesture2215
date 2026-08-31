@@ -29,6 +29,7 @@ typedef void (*AGButtonIMP)(SBRingerHardwareButton *,SEL,id<AGHardwareButtonEven
 @property(nonatomic) BOOL suppressSystemActionSnapshots;
 @property(nonatomic) BOOL snapshotScheduled;
 @property(nonatomic,copy) NSString *pendingSnapshotGesture;
+- (SBSystemActionAbstractDataSource *)dataSourceForButton:(SBRingerHardwareButton *)button;
 @end
 @implementation ActionGestureHelper
 + (instancetype)sharedHelper { static ActionGestureHelper *h; static dispatch_once_t once; dispatch_once(&once,^{h=[self new];}); return h; }
@@ -49,7 +50,7 @@ typedef void (*AGButtonIMP)(SBRingerHardwareButton *,SEL,id<AGHardwareButtonEven
 - (NSString *)symbolForShortcut:(NSString *)s { if([s hasSuffix:@"scan"])return @"qrcode.viewfinder"; if([s hasSuffix:@"pay"])return @"creditcard"; return @"bolt.slash"; }
 
 - (BOOL)prepareSpringBoardRuntime { Class c=objc_getClass("SBRingerHardwareButton"); Method d=class_getInstanceMethod(c,@selector(performActionsForButtonDown:)); Method l=class_getInstanceMethod(c,@selector(performActionsForButtonLongPress:)); Method u=class_getInstanceMethod(c,@selector(performActionsForButtonUp:)); if(!c||!d||!l||!u)return NO; _originalButtonDown=(AGButtonIMP)method_getImplementation(d); _originalButtonLongPress=(AGButtonIMP)method_getImplementation(l); _originalButtonUp=(AGButtonIMP)method_getImplementation(u); return YES; }
-- (NSUserDefaults *)springBoardDefaults { return [[NSUserDefaults alloc]initWithSuiteName:@"com.apple.springboard"]; }
+- (BOOL)canHandleButton:(SBRingerHardwareButton *)button { return button && _originalButtonDown && _originalButtonLongPress && _originalButtonUp && [[self dataSourceForButton:button] respondsToSelector:@selector(setSelectedSystemAction:)]; }
 - (AGGestureConfiguration *)currentNativeConfiguration { NSUserDefaults *d=[self springBoardDefaults]; NSString *section=[d objectForKey:@"SBSystemActionSelectedSectionIdentifier"]; NSData *archive=[d objectForKey:@"SBSystemActionConfiguredActionArchive"]; AGGestureConfiguration *c=[AGGestureConfiguration new]; c.hasSection=[section isKindOfClass:NSString.class]; c.hasArchive=[archive isKindOfClass:NSData.class]; c.sectionIdentifier=c.hasSection?section:nil; c.configuredActionArchive=c.hasArchive?archive:nil; return c; }
 - (NSString *)storageKey:(NSString *)g suffix:(NSString *)suffix { return [NSString stringWithFormat:@"native.%@.%@",g,suffix]; }
 - (AGGestureConfiguration *)configurationForGesture:(NSString *)g { if(![self isKnownGesture:g])return nil; if(![[self preferenceValueForKey:[self storageKey:g suffix:@"initialized"]] boolValue])return nil; AGGestureConfiguration *c=[AGGestureConfiguration new]; c.hasSection=[[self preferenceValueForKey:[self storageKey:g suffix:@"hasSection"]]boolValue]; c.hasArchive=[[self preferenceValueForKey:[self storageKey:g suffix:@"hasArchive"]]boolValue]; id s=[self preferenceValueForKey:[self storageKey:g suffix:@"section"]]; id a=[self preferenceValueForKey:[self storageKey:g suffix:@"archive"]]; if([s isKindOfClass:NSString.class])c.sectionIdentifier=s; if([a isKindOfClass:NSData.class])c.configuredActionArchive=a; return c; }
