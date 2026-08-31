@@ -11,6 +11,8 @@ NSString *const AGShortcutWeChatPay=@"wechat.pay";
 NSString *const AGShortcutAlipayScan=@"alipay.scan";
 NSString *const AGShortcutAlipayPay=@"alipay.pay";
 
+typedef void (*AGButtonIMP)(SBRingerHardwareButton *,SEL,id<AGHardwareButtonEvent>);
+
 @interface LSApplicationWorkspace : NSObject
 + (instancetype)defaultWorkspace;
 - (BOOL)openURL:(NSURL *)url;
