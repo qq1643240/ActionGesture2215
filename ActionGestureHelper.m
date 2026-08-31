@@ -30,6 +30,7 @@ typedef void (*AGButtonIMP)(SBRingerHardwareButton *,SEL,id<AGHardwareButtonEven
 @property(nonatomic) BOOL snapshotScheduled;
 @property(nonatomic,copy) NSString *pendingSnapshotGesture;
 - (SBSystemActionAbstractDataSource *)dataSourceForButton:(SBRingerHardwareButton *)button;
+- (NSUserDefaults *)springBoardDefaults;
 @end
 @implementation ActionGestureHelper
 + (instancetype)sharedHelper { static ActionGestureHelper *h; static dispatch_once_t once; dispatch_once(&once,^{h=[self new];}); return h; }
