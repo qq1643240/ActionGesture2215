@@ -15,8 +15,9 @@ jobs:
       - name: Setup Theos
         uses: Randomblock1/theos-action@main
         with:
-          theos-src: ${{ github.workspace }}/theos
-          sdks: iPhoneOS16.5
+          theos-dir: ${{ github.workspace }}/theos
+          theos-src: https://github.com/theos/theos.git
+          theos-sdks: https://github.com/theos/sdks
 
       - name: Build RootHide arm64e package
         run: make package FINALPACKAGE=1
