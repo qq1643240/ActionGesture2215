@@ -16,7 +16,7 @@
 
 ## RootHide 构建
 
-本项目固定构建 RootHide `arm64e`，目标包为 `ActionGesture2215_2.2.22_arm64e.deb`。
+本项目固定构建 RootHide `arm64e`，目标包为 `ActionGesture2215_2.2.23_arm64e.deb`。
 
 ```sh
 make package FINALPACKAGE=1
