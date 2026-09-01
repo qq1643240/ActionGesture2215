@@ -37,7 +37,6 @@ FOUNDATION_EXPORT NSString *const AGShortcutAlipayPay;
 - (void)endSuppressingSystemActionSnapshots;
 - (void)systemActionPreferenceDidChangeForKey:(NSString *)key;
 - (BOOL)hasStoredConfigurationForGesture:(NSString *)gesture;
-- (void)initializeConfigurationForGesture:(NSString *)gesture;
 - (void)snapshotNativeConfigurationForGesture:(NSString *)gesture;
 - (BOOL)applyNativeConfigurationForGesture:(NSString *)gesture;
 - (BOOL)reloadSelectedActionOnButton:(SBRingerHardwareButton *)button;
