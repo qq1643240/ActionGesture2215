@@ -35,6 +35,8 @@ typedef void (*AGButtonIMP)(SBRingerHardwareButton *,SEL,id<AGHardwareButtonEven
 @property(nonatomic) AGButtonIMP originalButtonUp;
 @property(nonatomic) NSMutableDictionary *systemActionCache;
 @property(nonatomic) BOOL suppressSystemActionSnapshots;
+@property(nonatomic) BOOL snapshotScheduled;
+@property(nonatomic,copy) NSString *pendingSnapshotGesture;
 @property(nonatomic) dispatch_queue_t shortcutLaunchQueue;
 - (SBSystemActionAbstractDataSource *)dataSourceForButton:(SBRingerHardwareButton *)button;
 - (NSUserDefaults *)springBoardDefaults;
