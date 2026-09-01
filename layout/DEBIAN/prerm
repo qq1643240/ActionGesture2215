@@ -1,0 +1,4 @@
+#!/bin/sh
+# Remove diagnostic logs when ActionGesture2215 is uninstalled.
+rm -f /var/tmp/ActionGesture2215.log /rootfs/var/tmp/ActionGesture2215.log
+exit 0
