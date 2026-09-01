@@ -1,6 +1,6 @@
 Package: com.huami.actiongesture2215
 Name: ActionGesture2215
-Version: 2.2.17
+Version: 2.2.18
 Architecture: iphoneos-arm64e
 Description: Action Button gestures and shortcut actions for RootHide
 Maintainer: huami

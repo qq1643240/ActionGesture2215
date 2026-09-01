@@ -38,7 +38,7 @@ jobs:
       - name: Publish GitHub release asset
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v2.2.17
-          name: ActionGesture2215 v2.2.17 RootHide arm64e
+          tag_name: v2.2.18
+          name: ActionGesture2215 v2.2.18 RootHide arm64e
           prerelease: false
           files: packages/*arm64e.deb
