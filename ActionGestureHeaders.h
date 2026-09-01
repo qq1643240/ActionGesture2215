@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ActionButtonSettings (ActionGestureUI)
 - (UIButton *)ag_selector:(NSString *)title menu:(UIMenu *)menu;
-- (void)ag_replace;
+- (void)ag_installSelectors;
 - (UIMenu *)ag_gestureMenu;
 - (UIMenu *)ag_shortcutMenu;
 @end
