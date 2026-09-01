@@ -30,6 +30,7 @@ FOUNDATION_EXPORT NSString *const AGShortcutAlipayPay;
 - (void)recordEvent:(NSString *)event;
 - (BOOL)prepareSpringBoardRuntime;
 - (BOOL)canHandleButton:(SBRingerHardwareButton *)button;
+- (BOOL)executeTapGesture:(NSString *)g onButton:(SBRingerHardwareButton *)button downEvent:(id<AGHardwareButtonEvent>)downEvent upEvent:(id<AGHardwareButtonEvent>)upEvent;
 - (BOOL)executeGesture:(NSString *)gesture onButton:(SBRingerHardwareButton *)button event:(id<AGHardwareButtonEvent>)event;
 - (BOOL)replayNativeActionOnButton:(SBRingerHardwareButton *)button event:(id<AGHardwareButtonEvent>)event;
 - (void)replayNativeTapOnButton:(SBRingerHardwareButton *)button downEvent:(id<AGHardwareButtonEvent>)downEvent upEvent:(id<AGHardwareButtonEvent>)upEvent;
