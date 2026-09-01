@@ -25,6 +25,7 @@ FOUNDATION_EXPORT NSString *const AGShortcutAlipayPay;
 - (NSString *)shortcutForGesture:(NSString *)gesture;
 - (void)saveShortcut:(NSString *)shortcut forGesture:(NSString *)gesture;
 - (NSString *)titleForShortcut:(NSString *)shortcut;
+- (BOOL)canUseShortcutForGesture:(NSString *)gesture;
 - (NSString *)symbolForShortcut:(NSString *)shortcut;
 - (void)recordEvent:(NSString *)event;
 - (BOOL)prepareSpringBoardRuntime;
@@ -38,5 +39,6 @@ FOUNDATION_EXPORT NSString *const AGShortcutAlipayPay;
 - (BOOL)hasStoredConfigurationForGesture:(NSString *)gesture;
 - (void)snapshotNativeConfigurationForGesture:(NSString *)gesture;
 - (BOOL)applyNativeConfigurationForGesture:(NSString *)gesture;
+- (BOOL)reloadSelectedActionOnButton:(SBRingerHardwareButton *)button;
 @end
 NS_ASSUME_NONNULL_END

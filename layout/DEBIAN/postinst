@@ -1,0 +1,4 @@
+#!/bin/sh
+# Start each installed ActionGesture build with a fresh diagnostic log.
+rm -f /var/tmp/ActionGesture2215.log /rootfs/var/tmp/ActionGesture2215.log
+exit 0
