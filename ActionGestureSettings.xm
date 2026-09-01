@@ -4,7 +4,6 @@
 %group ActionGestureOfficialSettings
 %hook NSUserDefaults
 - (void)setObject:(id)value forKey:(NSString *)key { %orig; [ActionGestureHelper.sharedHelper systemActionPreferenceDidChangeForKey:key]; }
-- (void)setValue:(id)value forKey:(NSString *)key { %orig; [ActionGestureHelper.sharedHelper systemActionPreferenceDidChangeForKey:key]; }
 - (void)removeObjectForKey:(NSString *)key { %orig; [ActionGestureHelper.sharedHelper systemActionPreferenceDidChangeForKey:key]; }
 %end
 
